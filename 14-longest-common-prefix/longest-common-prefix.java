@@ -4,19 +4,17 @@ class Solution {
             return "";
         }
 
-        // Use the first string as a reference and scan column by column
-        for (int i = 0; i < strs[0].length(); i++) {
-            char currentChar = strs[0].charAt(i);
+        String prefix = strs[0];
 
-            for (int j = 1; j < strs.length; j++) {
-                // Stop if a string is too short or has a different character at index i
-                if (i >= strs[j].length() || strs[j].charAt(i) != currentChar) {
-                    return strs[0].substring(0, i);
+        for (int i = 1; i < strs.length; i++) {
+            while (!strs[i].startsWith(prefix)) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) {
+                    return "";
                 }
             }
         }
 
-        // All characters of strs[0] matched across every string
-        return strs[0];
+        return prefix;
     }
 }
